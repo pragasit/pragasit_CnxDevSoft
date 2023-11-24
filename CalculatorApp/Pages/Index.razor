@@ -1,0 +1,39 @@
+@page "/"
+@inject CalculatorService CalculatorService
+
+<h3>Calculator</h3>
+<div>
+    <label>X: </label>
+    <input @bind="X" />
+</div>
+<div>
+    <label>Y: </label>
+    <input @bind="Y" />
+</div>
+<div>
+    <label>Operator: </label>
+    <select @bind="SelectedOperator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+</div>
+<div>
+    <button @onclick="Calculate">Calculate</button>
+</div>
+<div>
+    <h4>Result: @Result</h4>
+</div>
+
+@code {
+    private int X { get; set; }
+    private int Y { get; set; }
+    private string SelectedOperator { get; set; } = "+";
+    private int Result { get; set; }
+
+    private void Calculate()
+    {
+        Result = CalculatorService.Calculate(X, Y, SelectedOperator);
+    }
+}
